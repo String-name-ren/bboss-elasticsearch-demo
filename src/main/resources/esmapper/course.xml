@@ -1,0 +1,84 @@
+<properties>
+
+    <!--创建问题信息索引表结构-->
+    <property name="createIndex">
+        <![CDATA[
+            {
+              "settings": {
+                "number_of_shards": 3,
+                "number_of_replicas": 1
+              },
+              "mappings": {
+                "course": {
+                  "properties": {
+                    "courseId": {
+                      "type": "long"
+                    },
+                    "courseName": {
+                      "type": "text"
+                    },
+                    "createAt": {
+                      "type": "date",
+                      "format": "yyyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis"
+                    }
+                  }
+                }
+              }
+            }
+        ]]>
+    </property>
+
+
+    <!-- <property name="getPage1">
+         <![CDATA[{
+             "query": {
+                 "match_all": {
+                 }
+             }
+         }]]>
+     </property>-->
+
+
+    <property name="getPage">
+        <![CDATA[{
+            "query": {
+                "bool": {
+                    "filter": [
+                        ##设置一个boolean变量
+                        #set( $needComma = false )
+                        #if($courseId && $courseId > 0)
+                        {
+                            "term": {
+                                "courseId": #[courseId]
+                            }
+                            #set( $needComma = true )
+                        }
+                        #end
+
+                        #if($courseName)
+                        #if($needComma),#else #set( $needComma = true ) #end
+                        {
+                            "match": {
+                                "courseName": #[courseName]
+                            }
+                        }
+                        #end
+
+                    ]
+                }
+            },
+            "from": 0,
+            "size": 2,
+            "sort": [
+                {
+                  "courseId": {
+                    "order": "asc"
+                  }
+                }
+            ]
+        }]]>
+    </property>
+
+
+
+</properties>

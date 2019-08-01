@@ -1,0 +1,23 @@
+server:
+  port: 9898
+
+spring:
+  application:
+    name: demo
+  elasticsearch:
+    bboss:
+      elasticsearch:
+        rest:
+          hostNames: 192.168.141.230:9200
+          ##hostNames: 192.168.8.25:9200,192.168.8.26:9200,192.168.8.27:9200  ##ºØ»∫µÿ÷∑≈‰÷√
+        showTemplate: true
+        dateFormat: yyyy.MM.dd
+        timeZone: GMT+8
+        ttl: 2d
+        dslfile:
+          refreshInterval: -1
+
+
+es:
+  basePath: esmapper/
+  indexs: teacher,course
