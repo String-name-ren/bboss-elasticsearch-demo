@@ -1,2 +1,2 @@
 ### bboss-elasticsearch-demo
-bboss-elasticsearch使用demo
+bboss-elasticsearch的使用demo
